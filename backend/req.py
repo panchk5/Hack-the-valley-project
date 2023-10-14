@@ -1,11 +1,10 @@
 import openai
 
-openai.api_key = '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' # put in env later
-language = "python3" # make way to choose language 
-messages = [ {"role": "system", "content": "You are a helpful assistant who analyses code and provides meaningful feedback, the launguage used is" + language} ] 
+openai.api_key = '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' # put in env later
+language = "python3" # make way to choose language using a menu or something
+messages = [ {"role": "system", "content": "You are a helpful assistant who explains what the code is doing, do not provide feedback, the launguage used is" + language} ] 
 
 while True:
-    # ask user what language they're using
     message = input("Enter code to analyze: ") 
     if message == "-1": # exit 
         break
