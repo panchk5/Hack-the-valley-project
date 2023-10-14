@@ -119,7 +119,7 @@ Explaination = ""
 prompt = ""
 n_requests = 0
 
-lov_languages = ["Python", "Java", "Javascript"]
+Language = "Python"
 style = "x = 1"
 
 image = None
@@ -143,21 +143,20 @@ This mini-app generates Explainations using OpenAI's GPT-3 based [Davinci model]
 
 <br/>
 
-<|layout|columns=1 1 1 |gap=50px|class_name=card|
+<|layout|columns=1 1 1|gap=30px|class_name=card|
 <Language|
 ## **Language**{: .color-primary}
 
-
-<|{Language}|selector|lov={lov_languages}|on_change=on_change_country|dropdown|label=Select Language|>
+<|{Language}|input|label=Language|>
 |Language>
+
 <style|
 ## Enter **Code**{: .color-primary}
 
 <|{style}|input|multiline|label=Code_Explaination account handle to style-copy recent Explainations (optional)|>
 |style>
 
-<|Generate explanation|button|on_action=generate_text|label=ScriptSageify|>
-
+<|Generate text|button|on_action=generate_text|label=Generate text|>
 |>
 
 <br/>
