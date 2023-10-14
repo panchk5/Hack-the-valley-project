@@ -27,5 +27,3 @@ def chat():
         image = True
     return [reply, message]
     
-
-

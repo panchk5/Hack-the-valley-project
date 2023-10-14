@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
+from analysis import chat
 app = Flask(__name__)
 
 
@@ -9,9 +10,7 @@ def hello_world():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    user=request.form['user']
-    bot_response = "Hello, World!"
-    return 'Hello, World!'
+    return chat()
 
 if __name__ == '__main__':
     app.run()
