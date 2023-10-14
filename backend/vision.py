@@ -2,24 +2,27 @@ import io
 import os
 
 from google.cloud import vision
-from google.cloud.vision import types
+
 
 # Set up credentials
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'/path/to/your/credentials.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'C:\Users\krish\Documents\GitHub\Hack-the-valley-project\credentials.json'
 
-# Instantiate a client
-client = vision.ImageAnnotatorClient()
+def detect_text():
+    # Instantiate a client
+    client = vision.ImageAnnotatorClient()
 
-# Load the image into memory
-with io.open('/path/to/your/image.jpg', 'rb') as image_file:
-    content = image_file.read()
+    # Load the image into memory
+    with io.open(r'C:\Users\krish\Documents\GitHub\Hack-the-valley-project\backend\simpleprogram.jpg', 'rb') as image_file:
+        content = image_file.read()
 
-image = types.Image(content=content)
+    image = vision.Image(content=content)
 
-# Detect text in the image
-response = client.text_detection(image=image)
-texts = response.text_annotations
+    # Detect text in the image
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
 
-# Print the detected text
-for text in texts:
-    print('\n"{}"'.format(text.description))
+    # Print the detected text
+    text_combined = ""
+    for text in texts:
+        text_combined += text.description + " "
+    return text_combined
