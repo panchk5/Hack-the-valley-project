@@ -1,6 +1,7 @@
 import openai
+from decouple import config
 
-openai.api_key = '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' # put in env later
+openai.api_key = config('API_KEY_1') # API_KEY_1 is the key for the GPT-3.5-turbo model
 
 response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
