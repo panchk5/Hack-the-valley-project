@@ -1,9 +1,10 @@
-import openai
+# import openai
 from decouple import config
+import openai
 
 openai.api_key = config('API_KEY_1') # API_KEY_1 is the key for the GPT-3.5-turbo model
 language = "python3" # make way to choose language using a menu or something
-messages = [ {"role": "system", "content": "You are a helpful assistant who explains what the code is doing, do not provide feedback, the launguage used is" + language} ] 
+messages = [ {"role": "system", "content": "You are a helpful assistant who explains what the code is doing, do not provide feedback, the language used is" + language} ] 
 
 while True:
     message = input("Enter code to analyze: ") 
