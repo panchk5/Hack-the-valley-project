@@ -6,9 +6,9 @@ openai.api_key = config('API_KEY_1') # API_KEY_1 is the key for the GPT-3.5-turb
 def chat():
     language = "python3" # make way to choose language using a menu or something
     messages = [ {"role": "system", "content": "You are a helpful assistant who explains what the code is doing, do not provide feedback, the language used is" + language} ] 
-    i=0
+    image = False
     while True:
-        if i == 0:
+        if image == False:
             message = detect_text()
         else:
             message = input("You: ") 
@@ -24,7 +24,8 @@ def chat():
         reply = chat.choices[0].message.content 
         print(reply) 
         messages.append({"role": "assistant", "content": reply}) 
-        i += 1;
+        image = True
     return [reply, message]
     
+
 
