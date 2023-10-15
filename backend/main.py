@@ -2,6 +2,7 @@
 import logging
 import random
 import re
+
 # Import from 3rd party libraries
 from taipy.gui import Gui, notify
 
@@ -153,11 +154,10 @@ This mini-app generates Explainations using OpenAI's GPT-3 based [Davinci model]
 
 ### Generated **Explaination**{: .color-primary}
 
-<|{Explaination}|input|multiline|label=Resulting Explaination|class_name=fullwidth|>
 
+<|{Explanation}|input|multiline|label=Resulting Explanation|class_name=fullwidth|>
 
 """
-
 
 
 
