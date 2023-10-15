@@ -26,8 +26,8 @@ def error_too_many_requests(state):
 
 # Define functions
 def generate_text(state):
-    """Generate Explaination text."""
-    state.Explaination = ""
+    """Generate Explanation text."""
+    state.Explanation = ""
     state.image = None
 
     # Check the number of requests done by the user
@@ -40,7 +40,7 @@ def generate_text(state):
         notify(state, "error", "Please enter a Language")
         return
    
-    state.prompt = f"Explain the following {state.Language} code in simple language so someone without a coding background can understand it. {state.style}"
+    state.prompt = f"Explain the following {state.Language} code in simple language so someone without a coding background can understand it. {state.code}"
 
 
     # openai configured and check if text is flagged
@@ -51,27 +51,27 @@ def generate_text(state):
         error_prompt_flagged(state, f"Prompt: {state.prompt}\n")
         return
     else:
-        # Generate the Explaination
+        # Generate the Explanation
         state.n_requests += 1
-        state.Explaination = (
+        state.Explanation = (
             openai.complete(state.prompt).strip().replace('"', "")
         )
 
         # Notify the user in console and in the GUI
         logging.info(
-            f"Language: {state.prompt}{state.style}\n"
-            f"Explaination: {state.Explaination}"
+            f"Language: {state.prompt}{state.code}\n"
+            f"Explanation: {state.Explanation}"
         )
-        notify(state, "success", "Explaination created!")
+        notify(state, "success", "Explanation created!")
         
 # Variables
-Explaination = ""
+Explanation = ""
 rating = 0
 prompt = ""
 n_requests = 0
 
 Language = "Python"
-style = "x = 1"
+code = "x = 1"
 
 image = None
 
@@ -89,7 +89,7 @@ def generate_scalable_rating(state):
         error_too_many_requests(state)
         return
    
-    state.prompt = f"Imagine you are a Senior Software developer and are doing some code reviews. Look at the code at the end and evaluate the scalability of the code from a scale of 1-100. Give it a score of 1-100 based on scalable you interpret the code as.{state.style}"
+    state.prompt = f"Imagine you are a Senior Software developer and are doing some code reviews. Look at the code at the end and evaluate the scalability of the code from a scale of 1-100. Give it a score of 1-100 based on scalable you interpret the code as.{state.code}"
     # openai configured and check if text is flagged
     openai = oai.Openai()
     flagged = openai.moderate(state.prompt)
@@ -130,7 +130,7 @@ page = """
 <|container|
 # **Script**{: .color-primary} Sage
 
-This mini-app generates code explainations using OpenAI's [Davinci model](https://beta.openai.com/docs/models/overview). Made for HTV 8. You can find the code on [GitHub](https://github.com/panchk5/Hack-the-valley-project).
+This mini-app generates code Explanations using OpenAI's [Davinci model](https://beta.openai.com/docs/models/overview). Made for HTV 8. You can find the code on [GitHub](https://github.com/panchk5/Hack-the-valley-project).
 
 <br/>
 
@@ -146,11 +146,11 @@ Made By: [Shashwat Murawala](https://www.linkedin.com/in/shashwatmurawala/), [Fr
 |Language>
 |>
 
-<style|
+<code|
 ## Enter **Code**{: .color-primary}
 
-<|{style}|input|multiline|class_name=fullwidth|>
-|style>
+<|{code}|input|multiline|class_name=fullwidth|>
+|code>
 
 <|Generate text|button|on_action=generate_text|label= Sageify my code|>
 <|Generate Rating|button|on_action=generate_scalable_rating|label=Generate Rating|>
@@ -163,7 +163,7 @@ Made By: [Shashwat Murawala](https://www.linkedin.com/in/shashwatmurawala/), [Fr
 
 ### Generated **Explanation**{: .color-primary}
 
-<|{Explaination}|input|multiline|label=Resulting Explaination|class_name=fullwidth|>
+<|{Explanation}|input|multiline|label=Resulting Explanation|class_name=fullwidth|>
 
 ### Generated **Scalability Rating**{: .color-primary}
 
@@ -173,4 +173,4 @@ Made By: [Shashwat Murawala](https://www.linkedin.com/in/shashwatmurawala/), [Fr
 
 
 if __name__ == "__main__":
-    Gui(page).run(title='Explaination Generation')
+    Gui(page).run(title='Explanation Generation')
