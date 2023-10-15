@@ -122,7 +122,7 @@ page = """
 <|container|
 # **Script**{: .color-primary} Sage
 
-This mini-app generates code Explanations using OpenAI's [Davinci model](https://beta.openai.com/docs/models/overview). Made for HTV 8. You can find the code on [GitHub](https://github.com/panchk5/Hack-the-valley-project).
+This mini-app generates code Explanations using OpenAI's [Davinci model](https://beta.openai.com/docs/models/overview). Made for HTV 8. You can find the code on [GitHub](https://github.com/panchk5/Hack-the-valley-project). Credit to [Taipy](https://www.taipy.io/project/tweet-generation/).
 
 <br/>
 

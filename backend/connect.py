@@ -13,7 +13,6 @@ openai.api_key = os.environ.get("API_KEY_1")
 
 # Suppress openai request/response logging
 # Handle by manually changing the respective APIRequestor methods in the openai package
-# Does not work hosted on Streamlit since all packages are re-installed by Poetry
 # Alternatively (affects all messages from this logger):
 logging.getLogger("openai").setLevel(logging.WARNING)
 
