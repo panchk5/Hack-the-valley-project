@@ -103,6 +103,10 @@ This mini-app generates code explainations using OpenAI's [Davinci model](https:
 
 <br/>
 
+Made By: [Shashwat Murawala](https://www.linkedin.com/in/shashwatmurawala/), [Franklin Ramirez](https://www.linkedin.com/in/franklin-ramirez611/), [Krish Panchal](https://www.linkedin.com/in/panchk5/), and [Savvy Liu](https://www.linkedin.com/in/qi-liu-08556790/).
+
+<br/>
+
 <|layout|columns=1 1 1|gap=30px|class_name=card|
 <Language|
 ## **Language**{: .color-primary}
