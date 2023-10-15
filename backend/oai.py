@@ -10,6 +10,7 @@ import os
 load_dotenv()
 
 # Assign credentials from environment variable or streamlit secrets dict
+
 openai.api_key = os.environ.get("API_KEY_1")
 
 # Suppress openai request/response logging

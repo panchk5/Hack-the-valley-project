@@ -155,15 +155,6 @@ This mini-app generates Explainations using OpenAI's GPT-3 based [Davinci model]
 
 <|{Explaination}|input|multiline|label=Resulting Explaination|class_name=fullwidth|>
 
-<|Generate Rating|button|on_action=generate_scalable_rating|label=Generate Rating|>
-
-### Generated **Scalability Rating**{: .color-primary}
-
-rating = [(0,{rating})]
-data = pandas.DataFrame(rating, columns= [Scalability Rating, "1-100"])
-
-<|{data}|chart|type=bar|x=Scalability Rating|y=1-100|>
-
 
 """
 
