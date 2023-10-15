@@ -26,8 +26,8 @@ def error_too_many_requests(state):
 
 # Define functions 
 def generate_text(state):
-    """Generate Explaination text."""
-    state.Explaination = ""
+    """Generate Explanation text."""
+    state.Explanation = ""
     # state.image = None
 
     # Check the number of requests done by the user
@@ -51,18 +51,18 @@ def generate_text(state):
         error_prompt_flagged(state, f"Prompt: {state.prompt}\n")
         return
     else:
-        # Generate the Explaination
+        # Generate the Explanation
         state.n_requests += 1
-        state.Explaination = (
+        state.Explanation = (
             openai.complete(state.prompt).strip().replace('"', "")
         )
 
         # Notify the user in console and in the GUI
         logging.info(
             f"Language: {state.prompt}{state.style}\n"
-            f"Explaination: {state.Explaination}"
+            f"Explanation: {state.Explanation}"
         )
-        notify(state, "success", "Explaination created!")
+        notify(state, "success", "Explanation created!")
 
 def generate_scalable_rating(state):
     """Generate Scalable Rating Score"""
@@ -100,7 +100,7 @@ def generate_scalable_rating(state):
 
 
 # def generate_image(state):
-#     """Generate Explaination image."""
+#     """Generate Explanation image."""
 #     notify(state, "info", "Generating image...")
 
 #     # Check the number of requests done by the user
@@ -141,12 +141,12 @@ def generate_scalable_rating(state):
 #         state.image = openai.image(processed_prompt)
 
 #         # Notify the user in console and in the GUI
-#         logging.info(f"Explaination: {state.prompt}\nImage prompt: {processed_prompt}")
+#         logging.info(f"Explanation: {state.prompt}\nImage prompt: {processed_prompt}")
 #         notify(state, "success", f"Image created!")
 
 
 # Variables
-Explaination = ""
+Explanation = ""
 rating = 0
 prompt = ""
 n_requests = 0
@@ -171,7 +171,7 @@ page = """
 <|container|>
 # **Generate**{: .color-primary} Explanations
 
-This mini-app generates Explainations using OpenAI's GPT-3 based [Davinci model](https://beta.openai.com/docs/models/overview) for texts and [DALL·E](https://beta.openai.com/docs/guides/images) for images. You can find the code on [GitHub](https://github.com/Avaiga/demo-Explaination-generation) and the original author on [Code_Explaination](https://Code_Explaination.com/kinosal).
+This mini-app generates Explanations using OpenAI's GPT-3 based [Davinci model](https://beta.openai.com/docs/models/overview) for texts and [DALL·E](https://beta.openai.com/docs/guides/images) for images. You can find the code on [GitHub](https://github.com/Avaiga/demo-Explanation-generation) and the original author on [Code_Explanation](https://Code_Explanation.com/kinosal).
 
 <br/>
 
@@ -185,7 +185,7 @@ This mini-app generates Explainations using OpenAI's GPT-3 based [Davinci model]
 <style|
 ## Enter **Code**{: .color-primary}
 
-<|{style}|input|multiline|label=Code_Explaination account handle to style-copy recent Explainations (optional)|>
+<|{style}|input|multiline|label=Code_Explanation account handle to style-copy recent Explanations (optional)|>
 |style>
 
 <|Generate text|button|on_action=generate_text|label=Generate text|>
@@ -199,7 +199,7 @@ This mini-app generates Explainations using OpenAI's GPT-3 based [Davinci model]
 
 ### Generated **Explanation**{: .color-primary}
 
-<|{Explaination}|input|multiline|label=Resulting Explaination|class_name=fullwidth|>
+<|{Explanation}|input|multiline|label=Resulting Explanation|class_name=fullwidth|>
 
 ### Generated **Scalability Rating**{: .color-primary}
 
@@ -211,4 +211,4 @@ data = pandas.DataFrame(rating, columns= [Scalability Rating, "1-100"])
 """
 
 if __name__ == "__main__":
-    Gui(page).run(title='Explaination Generation')
+    Gui(page).run(title='Explanation Generation')
