@@ -2,7 +2,7 @@
 import logging
 import random
 import re
-import pandas
+# import pandas as pd
 
 
 # Import from 3rd party libraries
@@ -207,10 +207,7 @@ This mini-app generates Explanations using OpenAI's GPT-3 based [Davinci model](
 
 ### Generated **Scalability Rating**{: .color-primary}
 
-rating = [(0,{rating})]
-data = pandas.DataFrame(rating, columns= [Scalability Rating, "1-100"])
-
-<|{data}|chart|type=bar|x=Scalability Rating|y=1-100|>
+<|{rating}|input|multiline|label=Scalability Rating|class_name=fullwidth|>
 
 """
 
