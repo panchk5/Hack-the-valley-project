@@ -75,7 +75,7 @@ def generate_scalable_rating(state):
         error_too_many_requests(state)
         return
    
-    state.prompt = f"Imagine you are a Senior Software developer and are doing some code reviews. Look at the following {state.Language} and evaluate the scalability of the code from a scale of 1-100. Give it a score of 1-100 based on scalable you interpret the code as."
+    state.prompt = f"Imagine you are a Senior Software developer and are doing some code reviews. Look at the following {state.style} and evaluate the scalability of the code from a scale of 1-100. Give it a score of 1-100 based on scalable you interpret the code as."
     # openai configured and check if text is flagged
     openai = oai.Openai()
     flagged = openai.moderate(state.prompt)
@@ -203,11 +203,10 @@ This mini-app generates Explanations using OpenAI's GPT-3 based [Davinci model](
 
 <|{Explanation}|input|multiline|label=Resulting Explanation|class_name=fullwidth|>
 
-<|Generate Rating|button|on_action=generate_scalable_rating|label=Generate Rating|>
-
 ### Generated **Scalability Rating**{: .color-primary}
 
 <|{rating}|input|multiline|label=Scalability Rating|class_name=fullwidth|>
+<|Generate Rating|button|on_action=generate_scalable_rating|label=Generate Rating|>
 
 """
 
