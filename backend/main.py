@@ -24,7 +24,6 @@ def error_too_many_requests(state):
     logging.info(f"Session request limit reached: {state.n_requests}")
     state.n_requests = 1
 
-
 # Define functions
 def generate_text(state):
     """Generate Explaination text."""
@@ -64,56 +63,7 @@ def generate_text(state):
             f"Explaination: {state.Explaination}"
         )
         notify(state, "success", "Explaination created!")
-
-
-def generate_image(state):
-    """Generate Explaination image."""
-    notify(state, "info", "Generating image...")
-
-    # Check the number of requests done by the user
-    if state.n_requests >= 5:
-        error_too_many_requests(state)
-        return
-
-    state.image = None
-
-    # Creates the prompt
-    prompt_wo_hashtags = re.sub("#[A-Za-z0-9_]+", "", state.prompt)
-    processing_prompt = (
-        "Create a detailed but brief description of an image that captures "
-        f"the essence of the following text:\n{prompt_wo_hashtags}\n\n"
-    )
-
-    # Openai configured and check if text is flagged
-    openai = oai.Openai()
-    flagged = openai.moderate(processing_prompt)
-
-    if flagged:
-        error_prompt_flagged(state, processing_prompt)
-        return
-    else:
-        state.n_requests += 1
-        # Generate the prompt that will create the image
-        processed_prompt = (
-            openai.complete(
-                prompt=processing_prompt, temperature=0.5, max_tokens = 1000
-            )
-            .strip()
-            .replace('"', "")
-            .split(".")[0]
-            + "."
-        )
-
-        # Generate the image
-        state.image = openai.image(processed_prompt)
-
-        # Notify the user in console and in the GUI
-        logging.info(f"Explaination: {state.prompt}\nImage prompt: {processed_prompt}")
-        notify(state, "success", f"Image created!")
-
-
-
-
+        
 # Variables
 Explaination = ""
 prompt = ""
@@ -135,6 +85,16 @@ def on_exception(state, function_name: str, ex: Exception):
 ## |text> 
 ## "text" here is just a name given to my part/my section
 ## it has no meaning in the code
+
+programming_languages = [
+    'Ada', 'ALGOL', 'Assembly Language', 'Bash', 'C', 'C#', 'C++', 'Clojure', 'COBOL', 'CoffeeScript',
+    'Crystal', 'D', 'Dart', 'Elixir', 'Elm', 'Erlang', 'F#', 'Fortran', 'Go', 'Groovy',
+    'Haskell', 'HTML/CSS', 'Java', 'JavaScript', 'Julia', 'Kotlin', 'Lisp', 'Lua', 'MATLAB', 'Objective-C',
+    'Pascal', 'Perl', 'PHP', 'Prolog', 'Python', 'R', 'Ruby', 'Rust', 'Scala', 'Scheme', 'Shell',
+    'SQL', 'Swift', 'TypeScript', 'VB.NET', 'Visual Basic', 'VHDL', 'Verilog', 'VHDL', 'XML'
+]
+
+
 page = """
 <|container|
 # **Script**{: .color-primary} Sage
@@ -147,17 +107,17 @@ This mini-app generates code explainations using OpenAI's [Davinci model](https:
 <Language|
 ## **Language**{: .color-primary}
 
-<|{Language}|input|label=Language|>
+<|{Language}|selector|lov={programming_languages}|dropdown|label=Language|>
 |Language>
+|>
 
 <style|
 ## Enter **Code**{: .color-primary}
 
-<|{style}|input|multiline|>
+<|{style}|input|multiline|class_name=fullwidth|>
 |style>
 
-<|Generate text|button|on_action=generate_text|label= Scriptsageify my code|>
-|>
+<|Generate text|button|on_action=generate_text|label= Sageify my code|>
 
 <br/>
 
