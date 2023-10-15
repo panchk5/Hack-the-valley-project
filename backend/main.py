@@ -2,6 +2,8 @@
 import logging
 import random
 import re
+import pandas
+
 
 # Import from 3rd party libraries
 from taipy.gui import Gui, notify
