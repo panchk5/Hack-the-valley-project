@@ -137,9 +137,9 @@ def on_exception(state, function_name: str, ex: Exception):
 ## it has no meaning in the code
 page = """
 <|container|
-# **Generate**{: .color-primary} Explainations
+# **Script**{: .color-primary} Sage
 
-This mini-app generates Explainations using OpenAI's GPT-3 based [Davinci model](https://beta.openai.com/docs/models/overview) for texts and [DALLÂ·E](https://beta.openai.com/docs/guides/images) for images. You can find the code on [GitHub](https://github.com/Avaiga/demo-Explaination-generation) and the original author on [Code_Explaination](https://Code_Explaination.com/kinosal).
+This mini-app generates code explainations using OpenAI's [Davinci model](https://beta.openai.com/docs/models/overview). Made for HTV 8. You can find the code on [GitHub](https://github.com/panchk5/Hack-the-valley-project).
 
 <br/>
 
@@ -153,10 +153,10 @@ This mini-app generates Explainations using OpenAI's GPT-3 based [Davinci model]
 <style|
 ## Enter **Code**{: .color-primary}
 
-<|{style}|input|multiline|label=Code_Explaination account handle to style-copy recent Explainations (optional)|>
+<|{style}|input|multiline|>
 |style>
 
-<|Generate text|button|on_action=generate_text|label=Generate text|>
+<|Generate text|button|on_action=generate_text|label= Scriptsageify my code|>
 |>
 
 <br/>
