@@ -1,13 +1,11 @@
 # Import from standard library
 import logging
-import random
-import re
 
 # Import from 3rd party libraries
 from taipy.gui import Gui, notify
 
 # Import modules
-import oai
+import connect
 
 # Configure logger
 logging.basicConfig(format="\n%(asctime)s\n%(message)s", level=logging.INFO, force=True)
@@ -39,12 +37,11 @@ def generate_text(state):
     if state.Language == "":
         notify(state, "error", "Please enter a Language")
         return
-   
     state.prompt = f"Explain the following {state.Language} code in simple language so someone without a coding background can understand it. {state.code}"
 
 
     # openai configured and check if text is flagged
-    openai = oai.Openai()
+    openai = connect.Openai()
     flagged = openai.moderate(state.prompt)
     
     if flagged:
@@ -91,7 +88,7 @@ def generate_scalable_rating(state):
    
     state.prompt = f"Imagine you are a Senior Software developer and are doing some code reviews. Look at the code at the end and evaluate the scalability of the code from a scale of 1-100. Give it a score of 1-100 based on scalable you interpret the code as.{state.code}"
     # openai configured and check if text is flagged
-    openai = oai.Openai()
+    openai = connect.Openai()
     flagged = openai.moderate(state.prompt)
     
     if flagged:
@@ -111,11 +108,6 @@ def generate_scalable_rating(state):
         )
         notify(state, "success", "Rating created!")
 
-# Markdown for the entire page
-## <text|
-## |text> 
-## "text" here is just a name given to my part/my section
-## it has no meaning in the code
 
 programming_languages = [
     'Ada', 'ALGOL', 'Assembly Language', 'Bash', 'C', 'C#', 'C++', 'Clojure', 'COBOL', 'CoffeeScript',
@@ -173,4 +165,4 @@ Made By: [Shashwat Murawala](https://www.linkedin.com/in/shashwatmurawala/), [Fr
 
 
 if __name__ == "__main__":
-    Gui(page).run(title='Explanation Generation')
+    Gui(page).run(title='ScriptSage')

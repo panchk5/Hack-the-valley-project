@@ -1,4 +1,3 @@
-"""OpenAI API connector."""
 
 # Import from standard library
 import logging
