@@ -201,6 +201,8 @@ This mini-app generates Explanations using OpenAI's GPT-3 based [Davinci model](
 
 <|{Explanation}|input|multiline|label=Resulting Explanation|class_name=fullwidth|>
 
+<|Generate Rating|button|on_action=generate_scalable_rating|label=Generate Rating|>
+
 ### Generated **Scalability Rating**{: .color-primary}
 
 rating = [(0,{rating})]
