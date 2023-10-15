@@ -66,6 +66,7 @@ def generate_text(state):
         
 # Variables
 Explaination = ""
+rating = 0
 prompt = ""
 n_requests = 0
 
@@ -79,6 +80,36 @@ def on_exception(state, function_name: str, ex: Exception):
     logging.error(f"Problem {ex} \nin {function_name}")
     notify(state, 'error', f"Problem {ex} \nin {function_name}")
 
+def generate_scalable_rating(state):
+    """Generate Scalable Rating Score"""
+    state.rating = ""
+
+    # Check the number of requests done by the user
+    if state.n_requests >= 5:
+        error_too_many_requests(state)
+        return
+   
+    state.prompt = f"Imagine you are a Senior Software developer and are doing some code reviews. Look at the code at the end and evaluate the scalability of the code from a scale of 1-100. Give it a score of 1-100 based on scalable you interpret the code as.{state.style}"
+    # openai configured and check if text is flagged
+    openai = oai.Openai()
+    flagged = openai.moderate(state.prompt)
+    
+    if flagged:
+        error_prompt_flagged(state, f"Prompt: {state.prompt}\n")
+        return
+    else:
+        # Generate the Rating
+        state.n_requests += 1
+
+        state.rating = openai.complete(state.prompt)
+        
+        
+
+        # Notify the user in console and in the GUI
+        logging.info(
+            f"Rating: {state.rating}\n"
+        )
+        notify(state, "success", "Rating created!")
 
 # Markdown for the entire page
 ## <text|
@@ -122,6 +153,7 @@ Made By: [Shashwat Murawala](https://www.linkedin.com/in/shashwatmurawala/), [Fr
 |style>
 
 <|Generate text|button|on_action=generate_text|label= Sageify my code|>
+<|Generate Rating|button|on_action=generate_scalable_rating|label=Generate Rating|>
 
 <br/>
 
@@ -129,9 +161,13 @@ Made By: [Shashwat Murawala](https://www.linkedin.com/in/shashwatmurawala/), [Fr
 
 <br/>
 
-### Generated **Explaination**{: .color-primary}
+### Generated **Explanation**{: .color-primary}
 
 <|{Explaination}|input|multiline|label=Resulting Explaination|class_name=fullwidth|>
+
+### Generated **Scalability Rating**{: .color-primary}
+
+<|{rating}|input|multiline|label=Scalability Rating|class_name=fullwidth|>
 
 """
 
