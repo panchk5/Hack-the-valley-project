@@ -87,13 +87,8 @@ def generate_scalable_rating(state):
         # Generate the Rating
         state.n_requests += 1
 
-        try:
-            state.rating = float(openai.complete(state.prompt))
-        except ValueError:
-            # Handle the case where the response is not a valid number
-            state.rating = 0  # You can set it to None or another default value
+        state.rating = float(openai.complete(state.prompt))
         
-
         # Notify the user in console and in the GUI
         logging.info(
             f"Rating: {state.rating}\n"
